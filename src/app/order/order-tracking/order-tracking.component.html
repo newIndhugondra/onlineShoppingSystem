@@ -1,0 +1,6 @@
+<input [(ngModel)]="orderId" placeholder="Order ID">
+<button (click)="track()">Track</button>
+
+<div *ngIf="order">
+  <p>Order #{{order.orderId}} | Status: {{order.status}}</p>
+</div>

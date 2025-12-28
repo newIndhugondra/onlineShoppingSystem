@@ -1,5 +1,10 @@
-<app-navbar *ngIf="isLoggedIn"></app-navbar>
+<!-- <app-navbar *ngIf="isLoggedIn"></app-navbar> -->
 
 <div class="page">
   <router-outlet></router-outlet>
 </div>
+<nav>
+  <a routerLink="/order/place-order">Place Order</a>
+  <a routerLink="/order/my-orders">My Orders</a>
+  <a routerLink="/order/order-tracking">Track Order</a>
+</nav>

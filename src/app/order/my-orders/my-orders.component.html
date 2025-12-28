@@ -1,0 +1,7 @@
+<h2>My Orders:</h2>
+<div *ngFor="let o of orders">
+  <p>Order #{{o.orderId}} | {{o.status}} | ₹{{o.totalAmount}}</p>
+  <button (click)="cancel(o.orderId)" *ngIf="o.status!='CANCELLED'">
+    Cancel
+  </button>
+</div>
