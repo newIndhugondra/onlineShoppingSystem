@@ -1,16 +1,50 @@
-<h2>Verify OTP</h2>
+<div class="auth-container">
+  <div class="auth-card">
 
-<form [formGroup]="otpForm" (ngSubmit)="submit()">
+    <h2>🔐 Verify OTP</h2>
+    <p class="subtitle">
+      We’ve sent a one-time password to your registered phone number
+    </p>
 
-  <div>
-    <label>Enter OTP</label><br />
-    <input type="text" formControlName="otp">
+    <form [formGroup]="otpForm" (ngSubmit)="submit()">
+
+      <div class="form-group">
+        <label>Enter OTP</label>
+        <input
+          type="text"
+          formControlName="otp"
+          placeholder="6-digit OTP"
+          maxlength="6"
+        />
+      </div>
+
+      <p class="error" *ngIf="error">{{ error }}</p>
+
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Verifying...' : 'Verify OTP' }}
+      </button>
+
+    </form>
+
+    <p class="switch-link">
+      Didn’t receive OTP?
+      <a (click)="submit()" style="cursor:pointer">Resend</a>
+    </p>
+
   </div>
+</div>
+<input
+  type="text"
+  formControlName="otp"
+  placeholder="6-digit OTP"
+  maxlength="6"
+  autofocus
+/>
+<input
+  type="text"
+  inputmode="numeric"
+  pattern="[0-9]*"
+  maxlength="6"
+  formControlName="otp"
+/>
 
-  <p style="color:red" *ngIf="error">{{ error }}</p>
-
-  <button type="submit" [disabled]="loading">
-    {{ loading ? 'Verifying...' : 'Verify OTP' }}
-  </button>
-
-</form>

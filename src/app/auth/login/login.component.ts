@@ -10,7 +10,12 @@ import { AuthService } from '../../core/services/auth.service';
 export class LoginComponent {
 
   loading = false;
-  error = '';
+  error: string | null = null;
+
+  loginForm = this.fb.group({
+    emailOrPhone: ['', Validators.required],
+    password: ['', Validators.required]
+  });
 
   constructor(
     private fb: FormBuilder,
@@ -18,30 +23,24 @@ export class LoginComponent {
     private router: Router
   ) {}
 
-  loginForm = this.fb.group({
-    emailOrPhone: ['', Validators.required],
-    password: ['', Validators.required]
-  });
-
-  submit() {
+  login() {
     if (this.loginForm.invalid) return;
 
     this.loading = true;
-    this.error = '';
+    this.error = null;
 
-    this.authService.login(this.loginForm.value)
-      .subscribe({
-        next: (res: any) => {
-          // 🔑 SAVE JWT
-          this.authService.saveToken(res.data);
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (res: any) => {
+        // 🔑 save JWT
+        this.authService.saveToken(res.data);
 
-          // ➜ REDIRECT (profile will come next)
-          this.router.navigate(['/user/profile']);
-        },
-        error: err => {
-          this.error = err.error?.message || 'Login failed';
-          this.loading = false;
-        }
-      });
+        // ➜ redirect to profile
+        this.router.navigate(['/user/profile']);
+      },
+      error: err => {
+        this.error = err.error?.message || 'Login failed';
+        this.loading = false;
+      }
+    });
   }
 }

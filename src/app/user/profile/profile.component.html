@@ -1,8 +1,50 @@
-<h2>User Profile</h2>
+<div class="profile-card" *ngIf="user">
 
-<p *ngIf="loading">Loading...</p>
+  <h2>👤 My Profile</h2>
 
-<div *ngIf="user">
-  <p><strong>Email:</strong> {{ user.email }}</p>
-  <p><strong>Phone:</strong> {{ user.phone }}</p>
+  <p><b>Email:</b> {{ user.email }}</p>
+  <p><b>Phone:</b> {{ user.phone }}</p>
+
+  <!-- ADDRESS SECTION -->
+  <hr />
+  <h3>🏠 Addresses</h3>
+
+  <ul *ngIf="user.addresses?.length">
+    <li *ngFor="let a of user.addresses">
+      {{ a.street }}, {{ a.city }} {{ a.pincode }}
+    </li>
+  </ul>
+
+  <p *ngIf="!user.addresses?.length">No addresses added</p>
+
+  <button (click)="showAddressForm = !showAddressForm">
+    + Add Address
+  </button>
+
+  <form *ngIf="showAddressForm" [formGroup]="addressForm" (ngSubmit)="addAddress()">
+    <input placeholder="Street" formControlName="street" />
+    <input placeholder="City" formControlName="city" />
+    <input placeholder="State" formControlName="state" />
+    <input placeholder="Pincode" formControlName="pincode" />
+
+    <button type="submit">Save Address</button>
+  </form>
+
+  <!-- WISHLIST SECTION -->
+  <hr />
+  <h3>❤️ Wishlist</h3>
+
+  <ul *ngIf="user.wishlist?.length">
+    <li *ngFor="let item of user.wishlist">
+      Product ID: {{ item }}
+    </li>
+  </ul>
+
+  <p *ngIf="!user.wishlist?.length">Wishlist is empty</p>
+
+  <!-- TEMP DEMO BUTTON -->
+  <button (click)="addToWishlist('PROD123')">
+    + Add Dummy Product
+  </button>
+
 </div>

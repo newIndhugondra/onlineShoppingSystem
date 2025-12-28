@@ -1,0 +1,40 @@
+.profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile-wrapper h1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+/* Card */
+.profile-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px 28px;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* Rows */
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.row span {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.row strong {
+  font-size: 15px;
+}
